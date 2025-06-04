@@ -1,39 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center"
-    android:background="#E0F7FA">
+    android:background="#E0F7FA"
+    android:padding="16dp">
 
     <!-- 数字时钟 -->
-    <LinearLayout
+    <TextView
+        android:id="@+id/digitalClock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/digitalClock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="08:00 AM"
-            android:textSize="48sp"
-            android:textColor="#FFFFFF"
-            android:background="#0288D1"
-            android:padding="10dp"
-            android:layout_marginRight="8dp"/>
-
-
-    </LinearLayout>
+        android:text="08:00 AM"
+        android:textSize="48sp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/clock_bg"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/analogClock"
+        android:layout_marginBottom="24dp"/>
 
     <!-- 模拟时钟 -->
     <AnalogClock
         android:id="@+id/analogClock"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/digitalClock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/countdownTimer"
+        android:layout_marginBottom="24dp"/>
 
     <!-- 倒计时 -->
     <TextView
@@ -43,42 +41,53 @@
         android:text="50"
         android:textSize="48sp"
         android:textColor="#D81B60"
+        app:layout_constraintTop_toBottomOf="@id/analogClock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonGroup"
         android:layout_marginBottom="16dp"/>
 
-    <!-- 倒计时输入和按钮 -->
+    <!-- 倒计时输入和按钮组 -->
     <LinearLayout
+        android:id="@+id/buttonGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/countdownTimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
             android:id="@+id/countdownInput"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:hint="输入秒数"
             android:inputType="number"
             android:textSize="16sp"
-            android:layout_marginRight="8dp"/>
+            android:background="@drawable/input_bg"
+            android:padding="8dp"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/startCountdownButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始" />
+            android:text="开始"
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/pauseCountdownButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="暂停"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginEnd="8dp"/>
 
         <Button
             android:id="@+id/resetCountdownButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重置"
-            android:layout_marginLeft="8dp"/>
+            android:text="重置"/>
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
